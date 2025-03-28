@@ -88,3 +88,6 @@ Ecommerce-Follow-Along is a full-fledged **E-Commerce Application** built using 
 ### **🛠️ Milestone 14: Created Product Delete** 
 ✅ Created **Product Delete Endpoint** for Updating products.
 ✅ Created form for Deleting product in frontend.
+
+### **🛠️ Milestone 15: Created NavBar** 
+✅ Created **Navigation Bar** for Navigating between pages.

@@ -28,6 +28,8 @@ const useRouter = require("./controller/userRouter");
 
 const productRouter = require("./controller/productRouter");
 
+const allProductRouter = require("./controller/allProducts");
+
 
 app.get("/",(req,res)=>{
     try {
@@ -61,6 +63,8 @@ app.use("/product",async (req, res, next) => {
         return res.status(400).json({ message: "Invalid Token", error });
     }
 },productRouter);
+
+app.use("/allproducts",allProductRouter);
 
 app.listen(PORT,async ()=>{
     try {
