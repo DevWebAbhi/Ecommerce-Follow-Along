@@ -20,6 +20,13 @@ const Navbar = () => {
             }}>Add Products</p>
         </div>
         <div>
+            <div
+            onClick={()=>{
+                navigate("/myproducts");
+            }}
+            >My Products</div>
+        </div>
+        <div>
         <div
         onClick={()=>{
             navigate("/login");
