@@ -70,6 +70,7 @@ app.use("/product",async (req, res, next) => {
 
 app.use("/cart",
     async (req, res, next) => {
+        console.log("cart")
         try {
             const token = req.header("Authorization");
             console.log(token)

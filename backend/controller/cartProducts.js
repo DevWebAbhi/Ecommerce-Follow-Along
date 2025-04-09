@@ -7,6 +7,7 @@ const cartRouter = express.Router();
 
 
 cartRouter.get("/cartproduct/:id",async(req,res)=>{
+    console.log("cart")
     try {
         const {id} = req.params;
         if(!id){
@@ -39,6 +40,13 @@ cartRouter.put("/:cartproductid",async(req,res)=>{
             return res.status(400).send({message:"please add cart product id"});
         }
         const {noofcartitem} = req.query;
+        if(noofcartitem == 0){
+            const cartItemToBeDeleted = await cartModel.findByIdAndDelete({_id:cartproductid});
+            if(!cartItemToBeDeleted){
+                return res.status(404).send({message:"product not found"});
+            }
+            return res.status(200).send({message:"cart item deleted sucessfully"});
+        }
         if(noofcartitem<1){
             return res.status(400).send({message:"cart item count should not be less than 1"});
         }
@@ -53,10 +61,11 @@ cartRouter.put("/:cartproductid",async(req,res)=>{
     }
 })
 
-cartRouter.get("/",async(req,res)=>{
+cartRouter.get("/cart",async(req,res)=>{
     try {
         const userId=req.userId;
         const cartData = cartModel.find({_id:userId});
+        console.log("cart")
         return res.status(200).send({message:"cart items",cartProducts:cartData.length>0?cartData:"no items found in cart"})
     } catch (error) {
         return res.status(500).send({message:"something went wrong"});
