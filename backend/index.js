@@ -18,6 +18,8 @@ const userModel = require("./models/userModel");
 
 const cors = require("cors");
 
+const cartRouter = require("./controller/cartProducts");
+
 app.use(cors());
 
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
@@ -65,6 +67,31 @@ app.use("/product",async (req, res, next) => {
         return res.status(400).json({ message: "Invalid Token", error });
     }
 },productRouter);
+
+app.use("/cart",
+    async (req, res, next) => {
+        try {
+            const token = req.header("Authorization");
+            console.log(token)
+            if (!token) {
+                return res.status(401).json({ message: "Please login" });
+            }
+            
+            const decoded = jwt.verify(token, process.env.JWT_PASSWORD);
+            const user = await userModel.findById(decoded.id);
+            
+            if (!user && user.id) {
+                return res.status(404).json({ message: "Please signup" });
+            }
+            console.log(user.id);
+            req.userId = user.id; 
+            next();
+        } catch (error) {
+            console.log(error)
+            return res.status(400).json({ message: "Invalid Token", error });
+        }
+    } 
+    ,cartRouter);
 
 app.use("/allproducts",allProductRouter);
 

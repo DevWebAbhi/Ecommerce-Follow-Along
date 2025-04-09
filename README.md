@@ -95,3 +95,8 @@ Ecommerce-Follow-Along is a full-fledged **E-Commerce Application** built using 
 ### **🛠️ Milestone 16: Created ProductDetails Page** 
 ✅ Created **Product Details** for showing full product details in details page.
 ✅ Added Add to cart button with quantity selection.
+
+
+### **🛠️ Milestone 17:  CRUD for cart** 
+✅ Create endpoints in backend ***CRUD*** for handling cart.
+✅ Handaled quantity for product in cart.
