@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "E-Commerce-Follow-Along",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

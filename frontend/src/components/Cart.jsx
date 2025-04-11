@@ -9,13 +9,13 @@ const Cart = () => {
        try {
         const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id"))
         const userId = userData.id;
-        const getCartData = await axios.get("http://localhost:8080/cart/cart",
+        const getCartData = await axios.get("http://localhost:8080/cart",
             {headers: { 
                 "Authorization": userData.token 
             }}
         );
-        console.log(getCartData);
-
+        console.log(getCartData.data.cartProducts);
+        setProducts(getCartData.data.cartProducts);
        } catch (error) {
         console.log(error);
         alert("")

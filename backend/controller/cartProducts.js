@@ -61,10 +61,10 @@ cartRouter.put("/:cartproductid",async(req,res)=>{
     }
 })
 
-cartRouter.get("/cart",async(req,res)=>{
+cartRouter.get("/",async(req,res)=>{
     try {
         const userId=req.userId;
-        const cartData = cartModel.find({_id:userId});
+        const cartData = await cartModel.find({userId:userId});
         console.log("cart")
         return res.status(200).send({message:"cart items",cartProducts:cartData.length>0?cartData:"no items found in cart"})
     } catch (error) {

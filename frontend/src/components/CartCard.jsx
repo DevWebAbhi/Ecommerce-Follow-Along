@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "./card.module.css";
 import axios from "axios";
 const MyProductCard = ({product}) => {
-
+    const [quantity,setQuantity] = useState(1);
   async function handleDelete(id){
     try {
       const token = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id"));
@@ -22,8 +22,19 @@ const MyProductCard = ({product}) => {
     }
   }
   return (
-    <div className={styles.card}>
-       
+<div className={styles.card}>
+        <img className={styles.productImg} src={product.images[0]} alt={product.title} />
+        <h3>{product.title}</h3>
+        <p>${product.price}</p>
+        <div>
+          <button
+          onClick={()=>setQuantity(quantity-1)}
+          >-</button>
+          <button>{quantity}</button>
+          <button
+           onClick={()=>setQuantity(quantity+1)}
+          >+</button>
+        </div>
     </div>
   )
 }
