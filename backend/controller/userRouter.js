@@ -73,7 +73,7 @@ userRouter.post("/login", async (req, res) => {
 
         if (matchedPass) {
             const token = jwt.sign({ name:user.name,email:user.email,id:user.id }, process.env.JWT_PASSWORD);
-            return res.status(200).json({ message: "User logged in successfully",token,name:user.name,id:user.id });
+            return res.status(200).json({ message: "User logged in successfully",token,name:user.name,id:user.id,userImage:user.image});
         } else {
             return res.status(401).json({ message: "Invalid email or password" });
         }
