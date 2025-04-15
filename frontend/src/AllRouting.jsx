@@ -6,6 +6,7 @@ import Signup from './components/Signup';
 import AddProduct from './components/AddProduct';
 import MyProducts from './components/MyProducts';
 import Cart from "./components/Cart"
+import User from './components/User';
 const AllRouting = () => {
   return (
     <Routes>
@@ -15,6 +16,7 @@ const AllRouting = () => {
         <Route path='/addproducts' element={<AddProduct/>}/>
         <Route path='/myproducts' element={<MyProducts/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/user' element={<User/>}/>
     </Routes>
   )
 }
