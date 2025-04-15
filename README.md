@@ -107,3 +107,7 @@ Ecommerce-Follow-Along is a full-fledged **E-Commerce Application** built using 
 
 ### **🛠️ Milestone 19: Backend endpoint for cart item quantity**
 ✅ created put request for updating quantity for cart item.
+
+### **🛠️ Milestone 20: Backend endpoint for UserDetails**
+✅ created endpoint for userDetails in backend
+✅ created User.jsx for userDetails in frontend.

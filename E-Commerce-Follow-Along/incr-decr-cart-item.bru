@@ -5,7 +5,15 @@ meta {
 }
 
 put {
-  url: http://localhost:8080/cart/
+  url: http://localhost:8080/cart/67f89a8998c3cddaf69cfe4a?noofcartitem=0
   body: none
   auth: inherit
+}
+
+params:query {
+  noofcartitem: 0
+}
+
+headers {
+  Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQW1hbiIsImVtYWlsIjoiYW1hbkBnbWFpbC5jb20iLCJpZCI6IjY3ZTU2Yjk5MjNjZTNhY2YwYWRjYjU2YiIsImlhdCI6MTc0MzY1NTg3NH0.UtDzZRmv3P3Md_2R1k5LIifKcauiroIQft1lIrk1xcc
 }

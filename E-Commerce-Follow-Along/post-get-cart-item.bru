@@ -5,7 +5,15 @@ meta {
 }
 
 get {
-  url: http://localhost:8080/cart/cartproduct
+  url: http://localhost:8080/cart/cartproduct/67e625b77630746c31d98fc0?Auth
   body: none
   auth: inherit
+}
+
+params:query {
+  Auth: 
+}
+
+headers {
+  Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQW1hbiIsImVtYWlsIjoiYW1hbkBnbWFpbC5jb20iLCJpZCI6IjY3ZTU2Yjk5MjNjZTNhY2YwYWRjYjU2YiIsImlhdCI6MTc0MzY1NTg3NH0.UtDzZRmv3P3Md_2R1k5LIifKcauiroIQft1lIrk1xcc
 }
