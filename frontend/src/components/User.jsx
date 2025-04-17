@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id")) || [];
         console.log(userData)
 const User = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
     useEffect(()=>{
 
         console.log(searchParams);
@@ -26,6 +27,12 @@ const User = () => {
             }
         }
         >{userData.name}</h3>
+        <button
+            style={{background:"blue",border:"px solid",borderRadius:"0.3rem"}}
+            onClick={()=>{
+                navigate("/user-address")
+            }}
+        >Add Address</button>
     </div>
   )
 }
