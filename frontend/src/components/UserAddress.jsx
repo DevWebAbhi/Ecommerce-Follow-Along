@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import axios from "axios"
 const UserAddress = () => {
     const [address,setAddress] = useState({
         country:"",
@@ -9,14 +9,26 @@ const UserAddress = () => {
         zipCode:""
     });
 
-    function handleAddressForm(event){
-        event.preventDefault();
-        console.log(address);
+
+    async function postAddress(){
+        try {
+            const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id")) || [];
+            if(!userData.id){
+                alert("please login first");
+                return;
+            }
+            const sendAddress = await axios.put(`http://localhost:8080/user/updateAddress/${userData.id}`);
+            alert("address updated sucessfully");
+        } catch (error) {
+            alert("Something went wrong");
+            console.log(error);
+        }
     }
+
   return (
     <div>
         <form action=""
-        onSubmit={handleAddressForm}
+        onSubmit={postAddress}
         style={{
             display:"flex",
             flexDirection:"column",
