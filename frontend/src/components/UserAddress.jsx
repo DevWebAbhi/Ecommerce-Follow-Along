@@ -10,14 +10,26 @@ const UserAddress = () => {
     });
 
 
-    async function postAddress(){
+    async function postAddress(event){
+        event.preventDefault();
         try {
             const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id")) || [];
             if(!userData.id){
                 alert("please login first");
                 return;
             }
-            const sendAddress = await axios.put(`http://localhost:8080/user/updateAddress/${userData.id}`);
+            const {country,city,address1,address2,zipCode} = address;
+            if(!country || !city || !address1 ||!address2 || !zipCode){
+                alert("fill every fields");
+                return;
+            }
+            const sendAddress = await axios.post(`http://localhost:8080/address`
+                ,address,
+                {headers: { 
+                    "Authorization": userData.token 
+                }}
+            );
+
             alert("address updated sucessfully");
         } catch (error) {
             alert("Something went wrong");

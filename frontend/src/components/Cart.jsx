@@ -4,6 +4,7 @@ import styles from "./products.module.css";
 import CartCard from "./CartCard.jsx"
 const Cart = () => {
     const [products,setProducts] = useState([]);
+    const [totalPrice,setTotalPrice] = useState(0);
     async function getData(){
         
        try {
@@ -15,6 +16,11 @@ const Cart = () => {
             }}
         );
         console.log(getCartData.data.cartProducts);
+        const sum = 0;
+        const price = getCartData.data.cartProducts.forEach((ele)=>{
+            sum+=ele.price;
+        })
+        setTotalPrice(sum);
         setProducts(getCartData.data.cartProducts);
        } catch (error) {
         console.log(error);
@@ -29,6 +35,7 @@ const Cart = () => {
 
   return (
     <>
+    <h2>Total Price :{totalPrice}</h2>
         <h1>Products</h1>
         <div className={styles.products}>
         {
