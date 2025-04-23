@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import styles from "./products.module.css";
 import CartCard from "./CartCard.jsx"
+import { useNavigate } from 'react-router-dom';
 const Cart = () => {
     const [products,setProducts] = useState([]);
     const [totalPrice,setTotalPrice] = useState(0);
+    const navigate = useNavigate();
     async function getData(){
         
        try {
@@ -16,7 +18,7 @@ const Cart = () => {
             }}
         );
         console.log(getCartData.data.cartProducts);
-        const sum = 0;
+        let sum = 0;
         const price = getCartData.data.cartProducts.forEach((ele)=>{
             sum+=ele.price;
         })
@@ -44,6 +46,19 @@ const Cart = () => {
             })
         }
     </div>
+    <button
+    style={{
+        border:"1px solid",
+        borderRadius:"0.4rem",
+        display:"block",
+        margin:"auto",
+        background:"whitesmoke",
+        marginTop:"1rem"
+    }}
+        onClick={()=>{
+            navigate("/all-address");
+        }}
+    >Proceed to checkout</button>
     </>
   )
 }

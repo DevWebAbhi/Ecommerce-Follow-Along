@@ -5,13 +5,13 @@ const Card = ({product}) => {
   async function handleCart(id){
     try {
       const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id"))
-      const data = await axios.get(`http://localhost:8080/card/cartproduct/${id}`,
+      const data = await axios.get(`http://localhost:8080/cart/cartproduct/${id}`,
         {headers: { 
           "Authorization": userData.token 
       }}
       )
       console.log(data);
-      
+      alert("product added to cart sucessfully")
     } catch (error) {
       console.log(error)
       alert("something went wrong while adding to the cart")
@@ -23,7 +23,7 @@ const Card = ({product}) => {
         <h3>{product.title}</h3>
         <p>${product.price}</p>
         <button
-        onClick={()=>handleCart(product.id)}
+        onClick={()=>handleCart(product._id)}
         >Add to cart</button>
     </div>
   )

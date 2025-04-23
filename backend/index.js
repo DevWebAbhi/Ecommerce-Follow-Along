@@ -126,7 +126,7 @@ app.use("/allproducts",allProductRouter);
 
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 
-app.listen(PORT,async ()=>{
+app.listen(8080,async ()=>{
     try {
        await mongoose.connect(`mongodb+srv://abhishektiwari136136:${MONGO_PASSWORD}@cluster0.55lt4.mongodb.net/`);
        console.log("Connected sucessfully");

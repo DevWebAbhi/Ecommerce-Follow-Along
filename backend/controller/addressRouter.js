@@ -4,13 +4,9 @@ const addressRouter = express.Router();
 
 const addressModel = require("../models/addressSchema");
 
-addressRouter.get("/:id",async(req,res)=>{
+addressRouter.get("/",async(req,res)=>{
     try {
-        const {id} = req.params;
-        if(!id){
-            return res.status(400).send({message:"please login first"});
-        }
-        const addresses = await addressModel.find({userId:id});
+        const addresses = await addressModel.find({userId:req.userId});
         res.status(200).send({message:"address feached sucessfully",addresses});
     } catch (error) {
         return res.status(500).send({message:"something went wrong"});
