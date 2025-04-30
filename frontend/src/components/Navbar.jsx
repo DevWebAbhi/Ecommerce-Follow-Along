@@ -26,6 +26,13 @@ const Navbar = () => {
                 navigate("/addproducts");
             }}>Add Products</p>
         </div>
+        <div
+        onClick={()=>navigate("/user-address")}
+        >Add Address</div>
+        <div
+        onClick={()=>navigate("/all-address")}
+        >All Address</div>
+        <div>All Address</div>
         <div>
             <div
             onClick={()=>{
@@ -38,7 +45,7 @@ const Navbar = () => {
             onClick={()=>navigate("/cart")}
             >Cart</div>
         </div>
-        <div>
+        
             <div>
                 <div
                 onClick={
@@ -58,7 +65,7 @@ const Navbar = () => {
         >Signup</div>
         </div>
         
-    </div>
+    
   )
 }
 

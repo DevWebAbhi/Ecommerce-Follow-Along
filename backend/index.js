@@ -36,6 +36,11 @@ const allProductRouter = require("./controller/allProducts");
 
 const addressRouter = require("./controller/addressRouter");
 
+
+const mailer = require("./nodemailer");
+
+
+
 app.get("/",(req,res)=>{
     try {
         res.send({message:"This is E-commerce Follow Along Backend"});
