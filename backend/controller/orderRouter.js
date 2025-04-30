@@ -34,7 +34,9 @@ orderRouter.post("/",async(req,res)=>{
 
         const postOrder = await orderModel({addressId,products:productIDS}).save();
 
-        
+        const user =await userModel.findOne({_id:req.userId});
+
+        await mailer(user.email,"Order Confirmed",products+" "+address);
 
         return res.status(200).send({message:"products order sucessfully"});
 
