@@ -16,9 +16,11 @@ const cartModel = require("../models/cartModel");
 const mailer = require("../nodemailer")
 
 orderRouter.post("/",async(req,res)=>{
+    console.log("addressId,productIDS")
     try {
         const {addressId,productIDS} = req.body;
-        if(!addressId || productIDS.length<1){
+        
+        if(!addressId || !productIDS){
             return res.status(400).send({message:"please add address id and product id"});
         }
 
@@ -31,8 +33,9 @@ orderRouter.post("/",async(req,res)=>{
         if(products.length<1){
             return res.status(404).send({message:"products not found"});
         }
+        const userId = req.userId;
 
-        const postOrder = await orderModel({addressId,products:productIDS}).save();
+        const postOrder = await orderModel({userId,addressId,products:productIDS}).save();
 
         const user =await userModel.findOne({_id:req.userId});
 
@@ -41,9 +44,41 @@ orderRouter.post("/",async(req,res)=>{
         return res.status(200).send({message:"products order sucessfully"});
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({message:"something went wrong"});
     }
 })
+
+
+orderRouter.get("/",async(req,res)=>{
+    try {
+        
+        const userId = req.userId;
+        console.log(userId)
+        const orders = await orderModel.findOne({userId});
+        console.log(orders)
+        const allProductsIds = orders.products;
+        console.log(allProductsIds)
+        let ids = [];
+        for(let i=0;i<allProductsIds.length;i++){
+            ids[i] = allProductsIds[i].substring(12,37);
+        }
+        console.log(ids);
+        const products = cartModel.find({_id:allProductsIds[0]});
+
+        if(products.length<1){
+            return res.status(404).send({message:"products not found"});
+        }
+
+        return res.status(200).send({message:"products order sucessfully",products});
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message:"something went wrong"});
+    }
+})
+
+
 
 
 

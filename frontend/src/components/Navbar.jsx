@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react'
-import { useNavigate ,useSearchParams} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styles from "./navbar.module.css";
 const Navbar = () => {
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+   
     useEffect(()=>{
-        const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id")) || [];
-        
-        console.log(userData)
-        setSearchParams('userImage',userData.userImage);
+
     },[])
   return (
     <div
