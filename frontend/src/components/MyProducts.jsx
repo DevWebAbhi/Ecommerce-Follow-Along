@@ -1,42 +1,65 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from './Card';
-import styles from "./products.module.css";
-import MyProductCard from './MyProductCard';
+import MyProductCard from "./MyProductCard";
+
 const MyProducts = () => {
-    const [products,setProducts] = useState([]);
-    function getData(){
-        axios.get("http://localhost:8080/allproducts")
-        .then((data)=>{
-            console.log(data);
+  const [products, setProducts] = useState([]);
 
-            const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id"))
-            const newData = data.data.products.filter((ele)=>{
-                return ele.userId == userData.id; 
-            })
-            setProducts(newData);
-        }).catch((err)=>{
-            console.log(console.error(err));
-        })
+  // Fetch products for the logged-in user
+  async function getData() {
+    try {
+      const response = await axios.get("http://localhost:8080/allproducts");
+      const userData = JSON.parse(
+        localStorage.getItem("follow-along-auth-token-user-name-id")
+      );
+
+      const userProducts = response.data.products.filter(
+        (product) => product.userId === userData.id
+      );
+
+      setProducts(userProducts);
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
+  }
 
+  useEffect(() => {
+    getData();
+  }, []);
 
-    useEffect(()=>{
-        getData();
-    },[])
+  // Handle product deletion
+  const handleDelete = (id) => {
+    setProducts(products.filter((product) => product._id !== id));
+  };
+
+  // Handle product editing (placeholder for now)
+  const handleEdit = (product) => {
+    alert(`Edit functionality for product: ${product.title}`);
+  };
 
   return (
-    <>
-        <h1>Products</h1>
-        <div className={styles.products}>
-        {
-            products.map((ele)=>{
-                return <MyProductCard key={ele.id} product={ele}/>
-            })
-        }
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">
+          My Products
+        </h1>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <MyProductCard
+                key={product._id}
+                product={product}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600">No products found.</p>
+        )}
+      </div>
     </div>
-    </>
-  )
-}
+  );
+};
 
 export default MyProducts;

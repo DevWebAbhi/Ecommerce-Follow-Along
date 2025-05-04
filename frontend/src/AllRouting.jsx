@@ -9,6 +9,7 @@ import Cart from "./components/Cart"
 import User from './components/User';
 import UserAddress from './components/UserAddress';
 import AllAddress from './components/AllAddress';
+import Checkout from './components/Checkout';
 const AllRouting = () => {
   return (
     <Routes>
@@ -21,6 +22,8 @@ const AllRouting = () => {
         <Route path='/user' element={<User/>}/>
         <Route path='/user-address' element={<UserAddress/>}/>
         <Route path='/all-address' element={<AllAddress/>} />
+        <Route path='/checkout' element={<Checkout/>} />
+        <Route path='*' element={<h1>404 Not Found</h1>} />
     </Routes>
   )
 }

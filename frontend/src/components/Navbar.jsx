@@ -1,69 +1,78 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from "./navbar.module.css";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const Navbar = () => {
-    const navigate = useNavigate();
-   
-    useEffect(()=>{
+  const navigate = useNavigate();
 
-    },[])
   return (
-    <div
-    className={styles.navbar}
-    >
+    <nav className="bg-blue-600 text-white shadow-md">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        {/* Logo */}
         <div
-        onClick={()=>{
-            navigate("/");
-        }}
+          className="text-2xl font-bold cursor-pointer hover:text-gray-200"
+          onClick={() => navigate('/')}
         >
-            <h1>Home</h1>
+          Ecommerce
         </div>
-        <div>
-            <p onClick={()=>{
-                navigate("/addproducts");
-            }}>Add Products</p>
-        </div>
-        <div
-        onClick={()=>navigate("/user-address")}
-        >Add Address</div>
-        <div
-        onClick={()=>navigate("/all-address")}
-        >All Address</div>
-        <div>All Address</div>
-        <div>
-            <div
-            onClick={()=>{
-                navigate("/myproducts");
-            }}
-            >My Products</div>
-        </div>
-        <div>
-            <div
-            onClick={()=>navigate("/cart")}
-            >Cart</div>
-        </div>
-        
-            <div>
-                <div
-                onClick={
-                    ()=>navigate('/user')
-                }
-                >User</div>
-            </div>
-        <div
-        onClick={()=>{
-            navigate("/login");
-        }}
-        >Login</div>
-        <div
-        onClick={()=>{
-            navigate("/signup");
-        }}
-        >Signup</div>
-        </div>
-        
-    
-  )
-}
 
-export default Navbar
+        {/* Navigation Links */}
+        <div className="flex space-x-6">
+          <p
+            className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/addproducts')}
+          >
+            Add Products
+          </p>
+          <p
+            className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/user-address')}
+          >
+            Add Address
+          </p>
+          <p
+            className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/all-address')}
+          >
+            All Address
+          </p>
+          <p
+            className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/myproducts')}
+          >
+            My Products
+          </p>
+          <p
+            className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/cart')}
+          >
+            Cart
+          </p>
+          <p
+            className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/user')}
+          >
+            User
+          </p>
+        </div>
+
+        {/* Auth Links */}
+        <div className="flex space-x-4">
+          <button
+            className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100"
+            onClick={() => navigate('/login')}
+          >
+            Login
+          </button>
+          <button
+            className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100"
+            onClick={() => navigate('/signup')}
+          >
+            Signup
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
