@@ -49,6 +49,12 @@ const Navbar = () => {
           </p>
           <p
             className="cursor-pointer hover:text-gray-200"
+            onClick={() => navigate('/myorders')}
+          >
+            My Orders
+          </p>
+          <p
+            className="cursor-pointer hover:text-gray-200"
             onClick={() => navigate('/user')}
           >
             User

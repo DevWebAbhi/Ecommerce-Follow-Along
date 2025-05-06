@@ -9,7 +9,6 @@ const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Fetch user addresses
   async function getAddresses() {
     try {
       const userData = JSON.parse(
@@ -47,8 +46,8 @@ const Checkout = () => {
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
 
-      const productIds = cartProducts.map((product) => product._id);
-
+      const productIds = cartProducts.map((product) => product.productId);
+      console.log(productIds, "productIds");
       // Send order details to the backend
       await axios.post(
         "http://localhost:8080/order",
@@ -64,20 +63,10 @@ const Checkout = () => {
       );
 
       // Remove cart items
-      for (const productId of productIds) {
-        await axios.put(
-          `http://localhost:8080/cart/${productId}?noofcartitem=0`,
-          {},
-          {
-            headers: {
-              Authorization: userData.token,
-            },
-          }
-        );
-      }
+      
 
       alert("Order placed successfully!");
-      navigate("/myorders"); // Navigate to the orders page
+      navigate("/"); // Navigate to the orders page
     } catch (error) {
       console.error("Error during checkout:", error);
       alert("Something went wrong during checkout.");

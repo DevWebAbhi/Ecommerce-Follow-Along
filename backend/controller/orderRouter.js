@@ -30,7 +30,8 @@ orderRouter.post("/", async (req, res) => {
       return res.status(404).send({ message: "Address not found" });
     }
 
-    const products = await cartModel.find({ _id: { $in: productIDS } });
+    const products = await productModel.find({ _id: { $in: productIDS } });
+    console.log(products, "products");
     if (products.length < 1) {
       return res.status(404).send({ message: "Products not found" });
     }
@@ -45,8 +46,8 @@ orderRouter.post("/", async (req, res) => {
     });
 
     // Remove products from the cart
-    await cartModel.deleteMany({ _id: { $in: productIDS } });
-
+    const delData = await cartModel.deleteMany({ productId: { $in: productIDS } });
+    console.log(delData, "deleted data");
     return res.status(200).send({ message: "Order placed successfully", newOrder });
   } catch (error) {
     console.error("Error placing order:", error);
@@ -57,25 +58,47 @@ orderRouter.post("/", async (req, res) => {
 orderRouter.get("/", async (req, res) => {
   try {
     const userId = req.userId;
-    console.log(userId);
-    const orders = await orderModel.findOne({ userId });
-    console.log(orders);
-    const allProductsIds = orders.products;
-    console.log(allProductsIds);
-    let ids = [];
-    for (let i = 0; i < allProductsIds.length; i++) {
-      ids[i] = allProductsIds[i].substring(12, 37);
-    }
-    console.log(ids);
-    const products = cartModel.find({ _id: allProductsIds[0] });
 
-    if (products.length < 1) {
-      return res.status(404).send({ message: "Products not found" });
+
+    // Fetch all active orders for the user (optional: filter by status)
+    const orders = await orderModel
+      .find({ userId }) // Filter by active status if needed
+      .populate("addressId")
+      .populate("products");
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).send({ message: "No orders found" });
     }
 
-    return res.status(200).send({ message: "Products order successfully", products });
+    return res.status(200).send({ message: "Orders fetched successfully", orders });
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching orders:", error);
+    return res.status(500).send({ message: "Something went wrong" });
+  }
+});
+
+orderRouter.put("/cancel/:orderId", async (req, res) => {
+  try {
+    const { orderId } = req.params;
+
+    // Find the order by ID
+    const order = await orderModel.findById(orderId);
+    if (!order) {
+      return res.status(404).send({ message: "Order not found" });
+    }
+
+    // Check if the order is already canceled
+    if (order.status === "canceled") {
+      return res.status(400).send({ message: "Order is already canceled" });
+    }
+
+    // Mark the order as canceled
+    order.status = "canceled";
+    await order.save();
+
+    return res.status(200).send({ message: "Order canceled successfully", order });
+  } catch (error) {
+    console.error("Error canceling order:", error);
     return res.status(500).send({ message: "Something went wrong" });
   }
 });
