@@ -46,7 +46,12 @@ const Checkout = () => {
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
 
-      const productIds = cartProducts.map((product) => product.productId);
+      let price = 0;
+
+      const productIds = cartProducts.map((product) => {
+        price +=product.price;
+       return product.productId
+      });
       console.log(productIds, "productIds");
       // Send order details to the backend
       await axios.post(
@@ -66,7 +71,11 @@ const Checkout = () => {
       
 
       alert("Order placed successfully!");
-      navigate("/"); // Navigate to the orders page
+      
+        navigate("/payment", {
+          state: { payment: price },
+        })
+       // Navigate to the orders page
     } catch (error) {
       console.error("Error during checkout:", error);
       alert("Something went wrong during checkout.");
