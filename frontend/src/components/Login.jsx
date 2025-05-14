@@ -35,7 +35,12 @@ const Login = () => {
     try {
       const checkUser = await axios.post(
         "http://localhost:8080/user/login",
-        loginData
+        loginData,{
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       console.log(checkUser);
       localStorage.setItem(

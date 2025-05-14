@@ -18,9 +18,18 @@ const userModel = require("./models/userModel");
 
 const cors = require("cors");
 
+const cookieParsher = require("cookie-parser");
+
+app.use(cookieParsher());
+
 const cartRouter = require("./controller/cartProducts");
 
-app.use(cors());
+
+
+app.use(cors({
+    origin: "http://localhost:8080/user/login", 
+    credentials: true,
+}));
 
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
@@ -40,6 +49,7 @@ const addressRouter = require("./controller/addressRouter");
 const mailer = require("./nodemailer");
 
 const orderRouter = require("./controller/orderRouter");
+
 
 
 app.get("/",(req,res)=>{
