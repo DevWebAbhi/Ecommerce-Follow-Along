@@ -43,7 +43,7 @@ const AddProduct = () => {
 
       productImages.forEach((image) => formData.append("images", image));
 
-      const response = await axios.post("http://localhost:8080/product/addproduct", formData,{
+      const response = await axios.post("https://ecommerce-follow-along-ffxu.onrender.com/product/addproduct", formData,{
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: token.token,

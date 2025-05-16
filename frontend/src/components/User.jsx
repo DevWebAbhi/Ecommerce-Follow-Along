@@ -16,7 +16,7 @@ const User = () => {
   // Fetch user addresses
   async function getAddresses() {
     try {
-      const response = await axios.get("http://localhost:8080/address", {
+      const response = await axios.get("https://ecommerce-follow-along-ffxu.onrender.com/address", {
         headers: {
           Authorization: userData.token,
         },

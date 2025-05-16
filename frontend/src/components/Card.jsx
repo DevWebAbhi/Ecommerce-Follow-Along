@@ -9,7 +9,7 @@ const Card = ({ product }) => {
       );
 
       const response = await axios.get(
-        `http://localhost:8080/cart/cartproduct/${id}`,
+        `https://ecommerce-follow-along-ffxu.onrender.com/cart/cartproduct/${id}`,
         {
           headers: {
             Authorization: userData.token,

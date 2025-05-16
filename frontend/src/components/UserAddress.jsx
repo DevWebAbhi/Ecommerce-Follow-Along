@@ -63,7 +63,7 @@ const UserAddress = () => {
       }
 
       const sendAddress = await axios.post(
-        `http://localhost:8080/address`,
+        `https://ecommerce-follow-along-ffxu.onrender.com/address`,
         address,
         {
           headers: {

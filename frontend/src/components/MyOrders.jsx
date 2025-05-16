@@ -11,7 +11,7 @@ const MyOrders = () => {
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
 
-      const response = await axios.get("http://localhost:8080/order", {
+      const response = await axios.get("https://ecommerce-follow-along-ffxu.onrender.com/order", {
         headers: {
           Authorization: userData.token,
         },
