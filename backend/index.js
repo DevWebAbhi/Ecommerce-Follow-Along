@@ -27,7 +27,7 @@ const cartRouter = require("./controller/cartProducts");
 
 
 app.use(cors({
-    origin: "http://localhost:5173", 
+    origin: "https://ecommerce-follow-along-alpha.vercel.app", 
     credentials: true,
 }));
 
