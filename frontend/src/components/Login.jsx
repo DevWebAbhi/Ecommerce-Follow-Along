@@ -37,9 +37,6 @@ const Login = () => {
         "http://localhost:8080/user/login",
         loginData,{
           withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
         }
       );
       console.log(checkUser);

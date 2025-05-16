@@ -27,7 +27,7 @@ const cartRouter = require("./controller/cartProducts");
 
 
 app.use(cors({
-    origin: "http://localhost:8080/user/login", 
+    origin: "http://localhost:5173", 
     credentials: true,
 }));
 
@@ -64,7 +64,7 @@ app.use("/user",useRouter);
 
 app.use("/product",async (req, res, next) => {
     try {
-        const token = req.header("Authorization");
+        const token = req.cookies.token;
         console.log(token)
         if (!token) {
             return res.status(401).json({ message: "Please login" });
@@ -89,7 +89,7 @@ app.use("/cart",
     async (req, res, next) => {
         console.log("cart")
         try {
-            const token = req.header("Authorization");
+            const token = req.cookies.token;
             console.log(token)
             if (!token) {
                 return res.status(401).json({ message: "Please login" });
@@ -115,7 +115,7 @@ app.use("/cart",
         async (req, res, next) => {
             console.log("cart")
             try {
-                const token = req.header("Authorization");
+                const token = req.cookies.token;
                 console.log(token)
                 if (!token) {
                     return res.status(401).json({ message: "Please login" });
@@ -142,7 +142,7 @@ app.use("/cart",
     app.use("/order",async (req, res, next) => {
         console.log("cart")
         try {
-            const token = req.header("Authorization");
+            const token = req.cookies.token;
             console.log(token)
             if (!token) {
                 return res.status(401).json({ message: "Please login" });

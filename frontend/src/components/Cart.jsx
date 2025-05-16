@@ -48,7 +48,11 @@ const Cart = () => {
           headers: {
             Authorization: userData.token,
           },
-        });
+        }
+              ,{
+          withCredentials: true,
+        }
+      );
         setProducts(products.filter((product) => product._id !== id));
       } else {
         await axios.put(
@@ -58,6 +62,9 @@ const Cart = () => {
               Authorization: userData.token,
             },
           }
+                ,{
+          withCredentials: true,
+        }
         );
         getData();
       }

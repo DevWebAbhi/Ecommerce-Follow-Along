@@ -13,7 +13,11 @@ const AllAddress = () => {
         headers: {
           Authorization: userData.token,
         },
-      });
+      }
+          ,{
+          withCredentials: true,
+        }
+    );
       setAddress(response.data.addresses);
       console.log(response);
       alert("Data fetched successfully");
